@@ -37,7 +37,7 @@ A premium, fully responsive landing page for a music streaming platform. Built w
 
 ## 🚀 Live Demo
 
-**[View Live Demo]()**
+**[View Live Demo](https://daviiliev.github.io/Sonic-Music-Streaming-Plattform/)**
 
 ---
 
