@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SONIC – Stream the Future</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #1a3a3a;
+            --bg-soft: #2a4a4a;
+            --cream: #f5efe7;
+            --mustard: #e8b84b;
+            --mustard-light: #f5e0b8;
+            --text: #f5efe7;
+            --text-light: rgba(245, 239, 231, 0.5);
+            --white: #ffffff;
+            --shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+            --border: rgba(245, 239, 231, 0.04);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ---------- ANIMATED BG ---------- */
+        .bg-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+            animation: blobFloat 20s ease-in-out infinite alternate;
+        }
+
+        .bg-blob-1 {
+            top: -200px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: var(--mustard);
+        }
+
+        .bg-blob-2 {
+            bottom: -200px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: var(--bg-soft);
+            animation-delay: 6s;
+        }
+
+        @keyframes blobFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(60px, -40px) scale(1.2);
+            }
+        }
+
+        /* ---------- NAV ---------- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            background: rgba(26, 58, 58, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.4s;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 58, 58, 0.95);
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cream);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--mustard);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--mustard);
+        }
+
+        .nav-cta {
+            background: var(--mustard);
+            color: var(--bg) !important;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 30px rgba(232, 184, 75, 0.08);
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 40px rgba(232, 184, 75, 0.12);
+            color: var(--bg) !important;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--cream);
+            cursor: pointer;
+        }
+
+        /* ================================================
+           HERO
+        ================================================ */
+        .hero {
+            padding: 140px 0 60px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero-content .badge {
+            display: inline-block;
+            padding: 4px 16px;
+            background: rgba(232, 184, 75, 0.06);
+            border: 1px solid rgba(232, 184, 75, 0.08);
+            border-radius: 60px;
+            color: var(--mustard);
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 4.8rem;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h1 .highlight {
+            color: var(--mustard);
+        }
+
+        .hero-content p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 16px 44px;
+            border-radius: 60px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-family: 'Syne', sans-serif;
+            background: var(--mustard);
+            color: var(--bg);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 32px rgba(232, 184, 75, 0.04);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(232, 184, 75, 0.08);
+        }
+
+        .btn-outline {
+            padding: 16px 44px;
+            border-radius: 60px;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--cream);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--mustard);
+            background: rgba(232, 184, 75, 0.01);
+            transform: translateY(-4px);
+        }
+
+        /* ---------- WELLEN ---------- */
+        .wave-visual {
+            margin: 40px auto 0;
+            max-width: 600px;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 80px;
+        }
+
+        .wave-bar {
+            width: 8px;
+            background: var(--mustard);
+            border-radius: 60px;
+            opacity: 0.2;
+            animation: waveBar 0.8s ease-in-out infinite alternate;
+        }
+
+        .wave-bar:nth-child(1) {
+            height: 20px;
+            animation-delay: 0s;
+        }
+        .wave-bar:nth-child(2) {
+            height: 40px;
+            animation-delay: 0.1s;
+        }
+        .wave-bar:nth-child(3) {
+            height: 60px;
+            animation-delay: 0.2s;
+        }
+        .wave-bar:nth-child(4) {
+            height: 30px;
+            animation-delay: 0.3s;
+        }
+        .wave-bar:nth-child(5) {
+            height: 70px;
+            animation-delay: 0.4s;
+        }
+        .wave-bar:nth-child(6) {
+            height: 50px;
+            animation-delay: 0.5s;
+        }
+        .wave-bar:nth-child(7) {
+            height: 80px;
+            animation-delay: 0.6s;
+        }
+        .wave-bar:nth-child(8) {
+            height: 35px;
+            animation-delay: 0.7s;
+        }
+        .wave-bar:nth-child(9) {
+            height: 55px;
+            animation-delay: 0.8s;
+        }
+        .wave-bar:nth-child(10) {
+            height: 25px;
+            animation-delay: 0.9s;
+        }
+        .wave-bar:nth-child(11) {
+            height: 65px;
+            animation-delay: 0.3s;
+        }
+        .wave-bar:nth-child(12) {
+            height: 45px;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes waveBar {
+            0% {
+                transform: scaleY(0.3);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scaleY(1);
+                opacity: 0.6;
+            }
+        }
+
+        /* ---------- PLAYER ---------- */
+        .player-section {
+            padding: 20px 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .player-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 24px 28px 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            transition: transform 0.4s;
+        }
+
+        .player-wrapper:hover {
+            transform: translateY(-4px);
+        }
+
+        .player-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .player-top .now-playing {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .player-top .player-time {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .player-cover {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--mustard);
+            opacity: 0.2;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .player-controls button {
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .player-controls button:hover {
+            color: var(--mustard);
+        }
+
+        .player-controls .play-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--mustard);
+            color: var(--bg);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(232, 184, 75, 0.08);
+        }
+
+        .player-controls .play-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 30px rgba(232, 184, 75, 0.12);
+        }
+
+        .player-track {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .player-track .track-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .player-track .track-artist {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+
+        .player-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 60px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .player-progress .progress-bar {
+            width: 45%;
+            height: 100%;
+            background: var(--mustard);
+            border-radius: 60px;
+            animation: progressPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes progressPulse {
+            0%,
+            100% {
+                width: 45%;
+            }
+            50% {
+                width: 50%;
+            }
+        }
+
+        /* ================================================
+           ALBUM KARUSSELL (SINGLE-SLIDE)
+        ================================================ */
+        .album-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .album-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .album-header .tag {
+            display: inline-block;
+            color: var(--mustard);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .album-header h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .album-header h2 .highlight {
+            color: var(--mustard);
+        }
+
+        .album-header p {
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 8px auto 0;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .album-card {
+            min-width: 100%;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 32px 24px 24px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.4s;
+            cursor: pointer;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .album-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(232, 184, 75, 0.06);
+        }
+
+        .album-card .cover-image {
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto 16px;
+            aspect-ratio: 1 / 1;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--mustard);
+            opacity: 0.1;
+            transition: all 0.4s;
+            border: 1px solid var(--border);
+        }
+
+        .album-card:hover .cover-image {
+            transform: scale(1.02);
+        }
+
+        .album-card h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .album-card p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .album-card .btn-outline {
+            padding: 8px 24px;
+            font-size: 0.75rem;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .carousel-controls button {
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--cream);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .carousel-controls button:hover {
+            border-color: var(--mustard);
+            background: rgba(232, 184, 75, 0.02);
+            color: var(--mustard);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .carousel-dots .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .carousel-dots .dot.active {
+            background: var(--mustard);
+            width: 24px;
+            border-radius: 60px;
+        }
+
+        /* ================================================
+           STATISTIK-KACHELN
+        ================================================ */
+        .stats-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.01);
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stats-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .stats-header .tag {
+            display: inline-block;
+            color: var(--mustard);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .stats-header h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .stats-header h2 .highlight {
+            color: var(--mustard);
+        }
+
+        .stats-header p {
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 8px auto 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.4s;
+            backdrop-filter: blur(8px);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .stat-card .number {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--mustard);
+        }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* ================================================
+           MOVEMENT
+        ================================================ */
+        .movement-section {
+            padding: 80px 0 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .movement-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .movement-content .tag {
+            display: inline-block;
+            color: var(--mustard);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .movement-content h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.08;
+        }
+
+        .movement-content h2 .highlight {
+            color: var(--mustard);
+        }
+
+        .movement-content p {
+            color: var(--text-light);
+            max-width: 440px;
+            margin: 12px 0 28px;
+            line-height: 1.8;
+        }
+
+        .movement-content .live-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(232, 184, 75, 0.02);
+            border: 1px solid rgba(232, 184, 75, 0.04);
+            border-radius: 60px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .movement-content .live-counter .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2ecc71;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(0.6);
+            }
+        }
+
+        .movement-content .live-counter .number {
+            font-weight: 700;
+            color: var(--mustard);
+        }
+
+        .movement-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .movement-card {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 32px 28px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: transform 0.4s;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            animation: floatCard 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatCard {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .movement-card .card-icon {
+            font-size: 2.8rem;
+            color: var(--mustard);
+            opacity: 0.2;
+            margin-bottom: 12px;
+        }
+
+        .movement-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .movement-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        /* ================================================
+           FOOTER
+        ================================================ */
+        footer {
+            padding: 40px 0 24px;
+            border-top: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.01);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            gap: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .footer-brand .logo {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .footer-links h4 {
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 4px 0;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cream);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 24px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            opacity: 0.5;
+        }
+
+        .footer-bottom a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--cream);
+        }
+
+        /* ================================================
+           SCROLL-REVEAL
+        ================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ================================================
+           RESPONSIVE
+        ================================================ */
+        @media (max-width: 968px) {
+            .hero-content h1 {
+                font-size: 3.6rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .movement-wrapper {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .movement-content p {
+                margin: 12px auto 28px;
+            }
+
+            .movement-content .live-counter {
+                justify-content: center;
+            }
+
+            .carousel-wrapper {
+                max-width: 340px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--bg);
+                position: absolute;
+                top: 68px;
+                left: 0;
+                right: 0;
+                padding: 30px 24px;
+                gap: 20px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-wrapper {
+                max-width: 300px;
+            }
+
+            .movement-card {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-outline {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .wave-visual {
+                gap: 4px;
+                height: 60px;
+            }
+
+            .wave-bar {
+                width: 5px;
+            }
+
+            .carousel-wrapper {
+                max-width: 260px;
+            }
+
+            .album-card {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ANIMATED BG ===== -->
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+
+    <!-- ===== NAV ===== -->
+    <nav id="navbar">
+        <div class="container nav-wrapper">
+            <div class="logo">SONIC<span>.</span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#album">Albums</a></li>
+                <li><a href="#stats">Stats</a></li>
+                <li><a href="#movement" class="nav-cta">Join Now</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content reveal">
+                <div class="badge"><i class="fas fa-headphones"></i> High Quality Audio</div>
+                <h1>Music that <br /><span class="highlight">moves you</span></h1>
+                <p>Discover, stream, and share the music you love — all in one place.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn-primary"><i class="fas fa-arrow-right"></i> Start Listening</a>
+                    <a href="#" class="btn-outline"><i class="fas fa-play"></i> Explore</a>
+                </div>
+            </div>
+
+            <!-- WELLEN -->
+            <div class="wave-visual reveal">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+            </div>
+
+            <!-- PLAYER -->
+            <div class="player-section">
+                <div class="player-wrapper reveal-scale">
+                    <div class="player-top">
+                        <span class="now-playing">Now Playing</span>
+                        <span class="player-time">2:18 / 4:32</span>
+                    </div>
+                    <div class="player-cover">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="player-controls">
+                        <button><i class="fas fa-step-backward"></i></button>
+                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                        <button><i class="fas fa-step-forward"></i></button>
+                    </div>
+                    <div class="player-track">
+                        <div class="track-name">Midnight Echo</div>
+                        <div class="track-artist">Nova Wave</div>
+                    </div>
+                    <div class="player-progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ALBUM KARUSSELL ===== -->
+    <section class="album-section" id="album">
+        <div class="container">
+            <div class="album-header reveal">
+                <div class="tag">Discover</div>
+                <h2>New <span class="highlight">releases</span></h2>
+                <p>Fresh sounds from artists around the world.</p>
+            </div>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="album-card reveal-scale">
+                        <div class="cover-image"><i class="fas fa-cloud-moon"></i></div>
+                        <h4>Chill Waves</h4>
+                        <p>Nova Wave</p>
+                        <button class="btn-outline">Listen Now</button>
+                    </div>
+                    <div class="album-card reveal-scale">
+                        <div class="cover-image"><i class="fas fa-bolt"></i></div>
+                        <h4>Electric Pulse</h4>
+                        <p>Neon Tribe</p>
+                        <button class="btn-outline">Listen Now</button>
+                    </div>
+                    <div class="album-card reveal-scale">
+                        <div class="cover-image"><i class="fas fa-heart"></i></div>
+                        <h4>Indie Love</h4>
+                        <p>The Wildflowers</p>
+                        <button class="btn-outline">Listen Now</button>
+                    </div>
+                    <div class="album-card reveal-scale">
+                        <div class="cover-image"><i class="fas fa-moon"></i></div>
+                        <h4>Night Drive</h4>
+                        <p>Midnight Collective</p>
+                        <button class="btn-outline">Listen Now</button>
+                    </div>
+                    <div class="album-card reveal-scale">
+                        <div class="cover-image"><i class="fas fa-sun"></i></div>
+                        <h4>Golden Hour</h4>
+                        <p>Sunset Collective</p>
+                        <button class="btn-outline">Listen Now</button>
+                    </div>
+                    <div class="album-card reveal-scale">
+                        <div class="cover-image"><i class="fas fa-water"></i></div>
+                        <h4>Deep Blue</h4>
+                        <p>Ocean Drive</p>
+                        <button class="btn-outline">Listen Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button id="prevAlbum"><i class="fas fa-arrow-left"></i> Previous</button>
+                <button id="nextAlbum">Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+    </section>
+
+    <!-- ===== STATISTIK-KACHELN ===== -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="stats-header reveal">
+                <div class="tag">Stats</div>
+                <h2>Global <span class="highlight">reach</span></h2>
+                <p>Millions of listeners, thousands of tracks, one platform.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card reveal">
+                    <div class="number" data-target="250">0</div>
+                    <div class="label">Million tracks</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="number" data-target="50">0</div>
+                    <div class="label">Million listeners</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="number" data-target="190">0</div>
+                    <div class="label">Countries reached</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MOVEMENT ===== -->
+    <section class="movement-section" id="movement">
+        <div class="container">
+            <div class="movement-wrapper">
+                <div class="movement-content reveal-left">
+                    <div class="tag">Join the movement</div>
+                    <h2>Become part of <br /><span class="highlight">something bigger</span></h2>
+                    <p>Millions of listeners are already discovering new music every day. Join the community that's redefining how we listen.</p>
+                    <div class="live-counter">
+                        <span class="dot"></span>
+                        <span><span class="number">1,247</span> listening now</span>
+                    </div>
+                    <br />
+                    <a href="#" class="btn-primary"><i class="fas fa-arrow-right"></i> Start Listening</a>
+                </div>
+                <div class="movement-visual reveal-right">
+                    <div class="movement-card">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <h3>Community</h3>
+                        <p>Join a global community of music lovers.</p>
+                    </div>
+                    <div class="movement-card" style="animation-delay:1.5s;">
+                        <div class="card-icon"><i class="fas fa-music"></i></div>
+                        <h3>Discovery</h3>
+                        <p>Find new artists and genres every day.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">SONIC<span>.</span></div>
+                    <p>Stream the future.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Discover</h4>
+                        <a href="#">Genres</a>
+                        <a href="#">Playlists</a>
+                        <a href="#">New Releases</a>
+                    </div>
+                    <div>
+                        <h4>Company</h4>
+                        <a href="#">About</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Blog</a>
+                    </div>
+                    <div>
+                        <h4>Support</h4>
+                        <a href="#">Help Center</a>
+                        <a href="#">Contact</a>
+                        <a href="#">FAQs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 SONIC. All rights reserved.</span>
+                <div>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ================================================
+        // 1. MENU TOGGLE
+        // ================================================
+        const toggleBtn = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        toggleBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            const icon = toggleBtn.querySelector('i');
+            icon.className = navLinks.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                toggleBtn.querySelector('i').className = 'fas fa-bars';
+            });
+        });
+
+        // ================================================
+        // 2. NAVBAR SHADOW
+        // ================================================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ================================================
+        // 3. SMOOTH SCROLL
+        // ================================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ================================================
+        // 4. PLAY BUTTON
+        // ================================================
+        const playBtn = document.querySelector('.play-btn');
+
+        playBtn.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-play')) {
+                icon.className = 'fas fa-pause';
+                this.style.background = '#2ecc71';
+            } else {
+                icon.className = 'fas fa-play';
+                this.style.background = '#e8b84b';
+            }
+        });
+
+        // ================================================
+        // 5. ALBUM KARUSSELL (SINGLE-SLIDE)
+        // ================================================
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevAlbum');
+        const nextBtn = document.getElementById('nextAlbum');
+        const cards = track.querySelectorAll('.album-card');
+        const dotsContainer = document.getElementById('carouselDots');
+        let currentIndex = 0;
+        const totalSlides = cards.length;
+
+        // Dots erstellen
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        const dots = dotsContainer.querySelectorAll('.dot');
+
+        function goToSlide(index) {
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            const next = (currentIndex + 1) % totalSlides;
+            goToSlide(next);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            const prev = (currentIndex - 1 + totalSlides) % totalSlides;
+            goToSlide(prev);
+        });
+
+        // Touch-Swipe
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+
+        track.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (diff > 40) nextBtn.click();
+            else if (diff < -40) prevBtn.click();
+            isDragging = false;
+        });
+
+        // ================================================
+        // 6. COUNTER-ANIMATION
+        // ================================================
+        const statNumbers = document.querySelectorAll('.stat-card .number');
+        let countersStarted = false;
+
+        function animateCounters() {
+            if (countersStarted) return;
+            const section = document.querySelector('.stats-section');
+            const rect = section.getBoundingClientRect();
+
+            if (rect.top < window.innerHeight - 100) {
+                countersStarted = true;
+                statNumbers.forEach(stat => {
+                    const target = parseFloat(stat.dataset.target);
+                    let current = 0;
+                    const steps = 50;
+                    const increment = target / steps;
+                    let step = 0;
+
+                    const timer = setInterval(() => {
+                        step++;
+                        current += increment;
+                        if (step >= steps) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = Math.floor(current) + (target > 100 ? '+' : '');
+                    }, 30);
+                });
+            }
+        }
+
+        window.addEventListener('scroll', animateCounters);
+        window.addEventListener('load', () => {
+            setTimeout(animateCounters, 500);
+        });
+
+        // ================================================
+        // 7. SCROLL-REVEAL
+        // ================================================
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // ================================================
+        // 8. KONSOLE
+        // ================================================
+        console.log('%c🎵 SONIC – Perfekter Hintergrund', 'font-size: 32px; font-weight: bold; color: #e8b84b;');
+        console.log('%c🌊 Hintergrund: Dunkles Teal (#1a3a3a) · Perfekte Balance', 'font-size: 14px; color: rgba(255,255,255,0.4);');
+        console.log('%c🔥 Alles andere bleibt: Single-Slide-Karussell · Viele Effekte · Professionell', 'font-size: 14px; color: #e8b84b;');
+    </script>
+</body>
+</html>
