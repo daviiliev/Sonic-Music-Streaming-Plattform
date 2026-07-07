@@ -397,7 +397,7 @@
             border-radius: 12px;
             margin-bottom: 12px;
             overflow: hidden;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
         }
 
@@ -491,7 +491,7 @@
         }
 
         /* ================================================
-           ALBUM KARUSSELL (SINGLE-SLIDE)
+           NEUES KARUSSELL – MEHRERE KARTEN + SWIPE
         ================================================ */
         .album-section {
             padding: 80px 0;
@@ -534,44 +534,50 @@
         .carousel-wrapper {
             position: relative;
             overflow: hidden;
-            max-width: 400px;
+            max-width: 100%;
             margin: 0 auto;
+            padding: 0 10px;
         }
 
         .carousel-track {
             display: flex;
-            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            gap: 24px;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+            cursor: grab;
+        }
+
+        .carousel-track:active {
+            cursor: grabbing;
         }
 
         .album-card {
-            min-width: 100%;
-            flex-shrink: 0;
+            flex: 0 0 calc(25% - 18px);
+            min-width: 220px;
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
             border-radius: 20px;
-            padding: 32px 24px 24px;
+            padding: 24px 20px 20px;
             border: 1px solid var(--border);
             text-align: center;
             transition: all 0.4s;
-            cursor: pointer;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
         }
 
         .album-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
             border-color: rgba(232, 184, 75, 0.06);
         }
 
         .album-card .cover-image {
             width: 100%;
-            max-width: 200px;
-            margin: 0 auto 16px;
             aspect-ratio: 1 / 1;
             border-radius: 16px;
             overflow: hidden;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
             transition: all 0.4s;
+            margin-bottom: 12px;
         }
 
         .album-card .cover-image img {
@@ -587,51 +593,29 @@
 
         .album-card h4 {
             font-family: 'Syne', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
+            margin-bottom: 2px;
         }
 
         .album-card p {
             color: var(--text-light);
-            font-size: 0.85rem;
-            margin-bottom: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
         }
 
         .album-card .btn-outline {
-            padding: 8px 24px;
-            font-size: 0.75rem;
-        }
-
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .carousel-controls button {
-            padding: 10px 24px;
+            padding: 6px 20px;
+            font-size: 0.7rem;
             border-radius: 60px;
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--cream);
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
         }
 
-        .carousel-controls button:hover {
-            border-color: var(--mustard);
-            background: rgba(232, 184, 75, 0.02);
-            color: var(--mustard);
-        }
-
+        /* ----- CAROUSEL DOTS ----- */
         .carousel-dots {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-top: 16px;
+            gap: 10px;
+            margin-top: 28px;
         }
 
         .carousel-dots .dot {
@@ -639,13 +623,13 @@
             height: 8px;
             border-radius: 50%;
             background: var(--border);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .carousel-dots .dot.active {
             background: var(--mustard);
-            width: 24px;
+            width: 28px;
             border-radius: 60px;
         }
 
@@ -985,30 +969,15 @@
         /* ================================================
            RESPONSIVE
         ================================================ */
-        @media (max-width: 968px) {
-            .hero-content h1 {
-                font-size: 3.6rem;
+        @media (max-width: 1024px) {
+            .album-card {
+                flex: 0 0 calc(33.33% - 16px);
             }
+        }
 
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .movement-wrapper {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .movement-content p {
-                margin: 12px auto 28px;
-            }
-
-            .movement-content .live-counter {
-                justify-content: center;
-            }
-
-            .carousel-wrapper {
-                max-width: 340px;
+        @media (max-width: 820px) {
+            .album-card {
+                flex: 0 0 calc(50% - 12px);
             }
         }
 
@@ -1051,13 +1020,28 @@
                 grid-template-columns: 1fr;
             }
 
-            .carousel-wrapper {
-                max-width: 300px;
+            .movement-wrapper {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .movement-content p {
+                margin: 12px auto 28px;
+            }
+
+            .movement-content .live-counter {
+                justify-content: center;
             }
 
             .movement-card {
                 max-width: 320px;
                 margin: 0 auto;
+            }
+
+            .album-card {
+                flex: 0 0 calc(50% - 12px);
+                min-width: 160px;
+                padding: 16px 14px 14px;
             }
         }
 
@@ -1096,12 +1080,32 @@
                 width: 5px;
             }
 
-            .carousel-wrapper {
-                max-width: 260px;
+            .album-card {
+                flex: 0 0 calc(50% - 8px);
+                min-width: 140px;
+                padding: 12px 10px 10px;
             }
 
-            .album-card {
-                padding: 20px 16px;
+            .album-card h4 {
+                font-size: 0.9rem;
+            }
+
+            .album-card p {
+                font-size: 0.7rem;
+            }
+
+            .album-card .btn-outline {
+                font-size: 0.6rem;
+                padding: 4px 12px;
+            }
+
+            .carousel-dots .dot {
+                width: 6px;
+                height: 6px;
+            }
+
+            .carousel-dots .dot.active {
+                width: 20px;
             }
         }
     </style>
@@ -1140,7 +1144,6 @@
                 </div>
             </div>
 
-            <!-- WELLEN -->
             <div class="wave-visual reveal">
                 <div class="wave-bar"></div>
                 <div class="wave-bar"></div>
@@ -1156,7 +1159,6 @@
                 <div class="wave-bar"></div>
             </div>
 
-            <!-- PLAYER -->
             <div class="player-section">
                 <div class="player-wrapper reveal-scale">
                     <div class="player-top">
@@ -1183,13 +1185,13 @@
         </div>
     </section>
 
-    <!-- ===== ALBUM KARUSSELL ===== -->
+    <!-- ===== ALBUM KARUSSELL – MEHRERE KARTEN + SWIPE ===== -->
     <section class="album-section" id="album">
         <div class="container">
             <div class="album-header reveal">
                 <div class="tag">Discover</div>
                 <h2>New <span class="highlight">releases</span></h2>
-                <p>Fresh sounds from artists around the world.</p>
+                <p>Fresh sounds from artists around the world — swipe to explore.</p>
             </div>
 
             <div class="carousel-wrapper">
@@ -1230,12 +1232,19 @@
                         <p>Ocean Drive</p>
                         <button class="btn-outline">Listen Now</button>
                     </div>
+                    <div class="album-card reveal-scale">
+                        <div class="cover-image"><img src="https://picsum.photos/seed/echo/200/200" alt="Midnight Echo"></div>
+                        <h4>Midnight Echo</h4>
+                        <p>Nova Wave</p>
+                        <button class="btn-outline">Listen Now</button>
+                    </div>
+                    <div class="album-card reveal-scale">
+                        <div class="cover-image"><img src="https://picsum.photos/seed/sunset/200/200" alt="Sunset Drive"></div>
+                        <h4>Sunset Drive</h4>
+                        <p>Coastal Waves</p>
+                        <button class="btn-outline">Listen Now</button>
+                    </div>
                 </div>
-            </div>
-
-            <div class="carousel-controls">
-                <button id="prevAlbum"><i class="fas fa-arrow-left"></i> Previous</button>
-                <button id="nextAlbum">Next <i class="fas fa-arrow-right"></i></button>
             </div>
 
             <div class="carousel-dots" id="carouselDots"></div>
@@ -1395,63 +1404,176 @@
         });
 
         // ================================================
-        // 5. ALBUM KARUSSELL (SINGLE-SLIDE)
+        // 5. NEUES KARUSSELL – SWIPE + MEHRERE KARTEN
         // ================================================
         const track = document.getElementById('carouselTrack');
-        const prevBtn = document.getElementById('prevAlbum');
-        const nextBtn = document.getElementById('nextAlbum');
-        const cards = track.querySelectorAll('.album-card');
         const dotsContainer = document.getElementById('carouselDots');
         let currentIndex = 0;
-        const totalSlides = cards.length;
+        let totalSlides = 0;
+        let visibleCards = 4;
+        let cardWidth = 0;
+        let gap = 24;
 
-        // Dots erstellen
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
+        function initCarousel() {
+            const cards = track.querySelectorAll('.album-card');
+            totalSlides = cards.length;
+
+            // Sichtbare Karten basierend auf Bildschirmgröße
+            if (window.innerWidth <= 480) visibleCards = 1;
+            else if (window.innerWidth <= 600) visibleCards = 2;
+            else if (window.innerWidth <= 968) visibleCards = 2;
+            else if (window.innerWidth <= 1024) visibleCards = 3;
+            else visibleCards = 4;
+
+            // Breite berechnen
+            const wrapperWidth = track.parentElement.offsetWidth - 20;
+            cardWidth = (wrapperWidth - (visibleCards - 1) * gap) / visibleCards;
+
+            cards.forEach(c => {
+                c.style.flex = `0 0 ${cardWidth}px`;
+                c.style.minWidth = `${cardWidth}px`;
+            });
+
+            // Dots erstellen
+            dotsContainer.innerHTML = '';
+            const dotCount = Math.max(1, totalSlides - visibleCards + 1);
+            for (let i = 0; i < dotCount; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+
+            // Index zurücksetzen
+            currentIndex = 0;
+            updateCarousel();
         }
 
-        const dots = dotsContainer.querySelectorAll('.dot');
+        function updateCarousel() {
+            const maxIndex = Math.max(0, totalSlides - visibleCards);
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            const offset = currentIndex * (cardWidth + gap);
+            track.style.transform = `translateX(-${offset}px)`;
 
-        function goToSlide(index) {
-            currentIndex = index;
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-
+            // Dots aktualisieren
+            const dots = dotsContainer.querySelectorAll('.dot');
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === currentIndex);
             });
         }
 
-        nextBtn.addEventListener('click', () => {
-            const next = (currentIndex + 1) % totalSlides;
-            goToSlide(next);
-        });
+        function goToSlide(index) {
+            const maxIndex = Math.max(0, totalSlides - visibleCards);
+            currentIndex = Math.min(index, maxIndex);
+            updateCarousel();
+        }
 
-        prevBtn.addEventListener('click', () => {
-            const prev = (currentIndex - 1 + totalSlides) % totalSlides;
-            goToSlide(prev);
-        });
-
-        // Touch-Swipe
+        // ----- SWIPE UNTERSTÜTZUNG -----
         let startX = 0;
         let isDragging = false;
+        let currentTranslate = 0;
+        let startTranslate = 0;
 
         track.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             isDragging = true;
+            track.style.transition = 'none';
+            const matrix = track.style.transform;
+            const match = matrix.match(/translateX\(-([0-9.]+)px\)/);
+            startTranslate = match ? parseFloat(match[1]) : 0;
+            currentTranslate = startTranslate;
+            track.style.cursor = 'grabbing';
+        });
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const diff = (e.touches[0].clientX - startX) * 0.6;
+            currentTranslate = startTranslate - diff;
+            track.style.transform = `translateX(-${currentTranslate}px)`;
         });
 
         track.addEventListener('touchend', (e) => {
             if (!isDragging) return;
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
-            if (diff > 40) nextBtn.click();
-            else if (diff < -40) prevBtn.click();
             isDragging = false;
+            track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            track.style.cursor = 'grab';
+
+            const diff = startX - e.changedTouches[0].clientX;
+            const cardWidthWithGap = cardWidth + gap;
+
+            if (Math.abs(diff) > 30) {
+                if (diff > 0 && currentIndex < totalSlides - visibleCards) {
+                    goToSlide(currentIndex + 1);
+                } else if (diff < 0 && currentIndex > 0) {
+                    goToSlide(currentIndex - 1);
+                } else {
+                    updateCarousel();
+                }
+            } else {
+                updateCarousel();
+            }
         });
+
+        // Maus-Drag für Desktop
+        let isMouseDown = false;
+        let mouseStartX = 0;
+        let mouseStartTranslate = 0;
+
+        track.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            mouseStartX = e.clientX;
+            track.style.transition = 'none';
+            const matrix = track.style.transform;
+            const match = matrix.match(/translateX\(-([0-9.]+)px\)/);
+            mouseStartTranslate = match ? parseFloat(match[1]) : 0;
+            currentTranslate = mouseStartTranslate;
+            track.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isMouseDown) return;
+            const diff = (e.clientX - mouseStartX) * 0.6;
+            currentTranslate = mouseStartTranslate - diff;
+            track.style.transform = `translateX(-${currentTranslate}px)`;
+        });
+
+        window.addEventListener('mouseup', (e) => {
+            if (!isMouseDown) return;
+            isMouseDown = false;
+            track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            track.style.cursor = 'grab';
+
+            const diff = mouseStartX - e.clientX;
+            const cardWidthWithGap = cardWidth + gap;
+
+            if (Math.abs(diff) > 30) {
+                if (diff > 0 && currentIndex < totalSlides - visibleCards) {
+                    goToSlide(currentIndex + 1);
+                } else if (diff < 0 && currentIndex > 0) {
+                    goToSlide(currentIndex - 1);
+                } else {
+                    updateCarousel();
+                }
+            } else {
+                updateCarousel();
+            }
+        });
+
+        // Fenster-Resize
+        window.addEventListener('resize', () => {
+            initCarousel();
+        });
+
+        // Initial
+        document.addEventListener('DOMContentLoaded', () => {
+            initCarousel();
+        });
+        // Falls DOM schon geladen
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            initCarousel();
+        }
 
         // ================================================
         // 6. COUNTER-ANIMATION
@@ -1514,9 +1636,9 @@
         // ================================================
         // 8. KONSOLE
         // ================================================
-        console.log('%c🎵 SONIC – Perfekter Hintergrund', 'font-size: 32px; font-weight: bold; color: #e8b84b;');
-        console.log('%c🌊 Hintergrund: Dunkles Teal (#1a3a3a) · Perfekte Balance', 'font-size: 14px; color: rgba(255,255,255,0.4);');
-        console.log('%c🔥 Alles andere bleibt: Single-Slide-Karussell · Viele Effekte · Professionell', 'font-size: 14px; color: #e8b84b;');
+        console.log('%c🎵 SONIC – Neues Karussell', 'font-size: 32px; font-weight: bold; color: #e8b84b;');
+        console.log('%c📱 Mehrere Karten nebeneinander · Swipe zum Wechseln · Dots', 'font-size: 14px; color: rgba(255,255,255,0.4);');
+        console.log('%c🔥 Jetzt mit modernem, interaktivem Karussell!', 'font-size: 14px; color: #e8b84b;');
     </script>
 </body>
 </html>
