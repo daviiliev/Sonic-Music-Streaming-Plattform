@@ -394,16 +394,18 @@
         .player-cover {
             width: 100%;
             aspect-ratio: 1 / 1;
-            background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--mustard);
-            opacity: 0.2;
             margin-bottom: 12px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.02);
             border: 1px solid var(--border);
+        }
+
+        .player-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .player-controls {
@@ -565,16 +567,18 @@
             max-width: 200px;
             margin: 0 auto 16px;
             aspect-ratio: 1 / 1;
-            background: rgba(255, 255, 255, 0.02);
             border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--mustard);
-            opacity: 0.1;
-            transition: all 0.4s;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
+            transition: all 0.4s;
+        }
+
+        .album-card .cover-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .album-card:hover .cover-image {
@@ -1160,7 +1164,7 @@
                         <span class="player-time">2:18 / 4:32</span>
                     </div>
                     <div class="player-cover">
-                        <i class="fas fa-music"></i>
+                        <img src="https://picsum.photos/seed/music/400/400" alt="Album Cover">
                     </div>
                     <div class="player-controls">
                         <button><i class="fas fa-step-backward"></i></button>
@@ -1191,37 +1195,37 @@
             <div class="carousel-wrapper">
                 <div class="carousel-track" id="carouselTrack">
                     <div class="album-card reveal-scale">
-                        <div class="cover-image"><i class="fas fa-cloud-moon"></i></div>
+                        <div class="cover-image"><img src="https://picsum.photos/seed/chill/200/200" alt="Chill Waves"></div>
                         <h4>Chill Waves</h4>
                         <p>Nova Wave</p>
                         <button class="btn-outline">Listen Now</button>
                     </div>
                     <div class="album-card reveal-scale">
-                        <div class="cover-image"><i class="fas fa-bolt"></i></div>
+                        <div class="cover-image"><img src="https://picsum.photos/seed/pulse/200/200" alt="Electric Pulse"></div>
                         <h4>Electric Pulse</h4>
                         <p>Neon Tribe</p>
                         <button class="btn-outline">Listen Now</button>
                     </div>
                     <div class="album-card reveal-scale">
-                        <div class="cover-image"><i class="fas fa-heart"></i></div>
+                        <div class="cover-image"><img src="https://picsum.photos/seed/love/200/200" alt="Indie Love"></div>
                         <h4>Indie Love</h4>
                         <p>The Wildflowers</p>
                         <button class="btn-outline">Listen Now</button>
                     </div>
                     <div class="album-card reveal-scale">
-                        <div class="cover-image"><i class="fas fa-moon"></i></div>
+                        <div class="cover-image"><img src="https://picsum.photos/seed/night/200/200" alt="Night Drive"></div>
                         <h4>Night Drive</h4>
                         <p>Midnight Collective</p>
                         <button class="btn-outline">Listen Now</button>
                     </div>
                     <div class="album-card reveal-scale">
-                        <div class="cover-image"><i class="fas fa-sun"></i></div>
+                        <div class="cover-image"><img src="https://picsum.photos/seed/golden/200/200" alt="Golden Hour"></div>
                         <h4>Golden Hour</h4>
                         <p>Sunset Collective</p>
                         <button class="btn-outline">Listen Now</button>
                     </div>
                     <div class="album-card reveal-scale">
-                        <div class="cover-image"><i class="fas fa-water"></i></div>
+                        <div class="cover-image"><img src="https://picsum.photos/seed/blue/200/200" alt="Deep Blue"></div>
                         <h4>Deep Blue</h4>
                         <p>Ocean Drive</p>
                         <button class="btn-outline">Listen Now</button>
